@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - ProsperCat</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e0e0e0; line-height: 1.7; }
+    .hero { text-align: center; padding: 60px 20px; background: linear-gradient(180deg, #0f0f1a 0%, #0a0a0f 100%); }
+    .logo { font-size: 24px; font-weight: bold; color: #f5a623; margin-bottom: 20px; }
+    h1 { font-size: 48px; color: #fff; margin-bottom: 15px; }
+    .subtitle { font-size: 20px; color: #888; max-width: 600px; margin: 0 auto; }
+    .pricing { padding: 60px 20px; max-width: 900px; margin: 0 auto; }
+    .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+    .plan { background: #111; border: 1px solid #222; border-radius: 16px; padding: 40px 30px; text-align: center; transition: transform 0.3s; }
+    .plan:hover { transform: translateY(-5px); border-color: #f5a623; }
+    .plan.featured { border: 2px solid #f5a623; position: relative; }
+    .badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #f5a623; color: #000; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+    .plan-name { font-size: 24px; color: #fff; margin-bottom: 10px; }
+    .plan-price { margin: 20px 0; }
+    .plan-price .amount { font-size: 48px; font-weight: bold; color: #fff; }
+    .plan-price .period { color: #666; }
+    .plan-price .yearly { font-size: 18px; color: #f5a623; margin-top: 5px; }
+    .plan-features { text-align: left; margin: 30px 0; }
+    .plan-features li { list-style: none; padding: 8px 0; color: #b0b0b0; border-bottom: 1px solid #222; }
+    .plan-features li:before { content: "✓ "; color: #f5a623; margin-right: 10px; }
+    .cta { display: inline-block; width: 100%; padding: 15px 30px; background: linear-gradient(135deg, #f5a623, #ff6b35); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; transition: opacity 0.3s; }
+    .cta:hover { opacity: 0.9; }
+    .faq { padding: 60px 20px; max-width: 700px; margin: 0 auto; }
+    .faq h2 { font-size: 32px; color: #fff; text-align: center; margin-bottom: 40px; }
+    .faq-item { margin-bottom: 30px; }
+    .faq-item h3 { font-size: 18px; color: #f5a623; margin-bottom: 10px; }
+    .faq-item p { color: #888; }
+    footer { text-align: center; padding: 40px 20px; border-top: 1px solid #222; color: #666; font-size: 14px; }
+    a { color: #f5a623; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="logo">🐱 ProsperCat</div>
+    <h1>Simple, Transparent Pricing</h1>
+    <p class="subtitle">Start generating professional listings today. No hidden fees.</p>
+  </div>
+
+  <div class="pricing">
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">
+          <span class="amount">$39</span>
+          <span class="period">/month</span>
+          <div class="yearly">or $299/year (save $169)</div>
+        </div>
+        <ul class="plan-features">
+          <li>Unlimited listing generations</li>
+          <li>All platforms (Etsy, Shopify, Amazon)</li>
+          <li>AI title + tags + description</li>
+          <li>7-day free trial</li>
+          <li>Email support</li>
+        </ul>
+        <a href="#" class="cta">Start Free Trial</a>
+      </div>
+
+      <div class="plan featured">
+        <div class="badge">MOST POPULAR</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">
+          <span class="amount">$299</span>
+          <span class="period">/year</span>
+          <div class="yearly">$25/month, billed annually</div>
+        </div>
+        <ul class="plan-features">
+          <li>Everything in Starter</li>
+          <li>Priority processing</li>
+          <li>Advanced AI models</li>
+          <li>Batch generation</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="cta">Get Pro</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>What's included in the free trial?</h3>
+      <p>You get 7 days free access to all Starter features. No credit card required to start.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I cancel anytime?</h3>
+      <p>Yes, you can cancel your subscription at any time. Your access continues until the end of your billing period.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What payment methods do you accept?</h3>
+      <p>We accept all major credit cards, PayPal, and other payment methods processed securely via Paddle.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is there a refund policy?</h3>
+      <p>Due to the nature of digital products, subscription fees are generally non-refundable. Please see our Refund Policy for details.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do you offer custom plans for agencies?</h3>
+      <p>Contact us at support@prospercat.com for enterprise pricing and custom solutions.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>🐱 ProsperCat - AI Listing Generator | <a href="/landing/">Home</a> | <a href="/landing/terms.html">Terms</a> | <a href="/landing/privacy.html">Privacy</a> | <a href="/landing/refund.html">Refund</a></p>
+  </footer>
+</body>
+</html>
