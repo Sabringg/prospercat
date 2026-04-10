@@ -1,0 +1,10 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --accent: #7c3aed;
+  --accent-light: #ede8ff;
+  --bg: #ffffff;
+  --text: #0d0d1a;
+  --text-secondary: #5a5a72;
+}
+html, body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+body { min-height: 100vh; }
