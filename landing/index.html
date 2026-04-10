@@ -38,61 +38,58 @@
         .section-head.center { text-align: center; }
         .section-head.center .section-sub { margin: 0 auto; }
 
-        /* ===== PREMIUM BUTTONS ===== */
-        .btn-premium {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 15px 34px; border-radius: var(--radius); font-size: 15px; font-weight: 700;
-            cursor: pointer; transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); border: none;
-            position: relative; text-decoration: none; outline: none; letter-spacing: 0.2px;
-            background: linear-gradient(145deg, #8b5cf6 0%, #6d28d9 100%);
-            color: #fff; border: none;
-            box-shadow:
-                0 1px 2px rgba(0,0,0,0.06),
-                0 4px 8px rgba(var(--shadow-c), 0.3),
-                0 8px 24px rgba(var(--shadow-c), 0.2),
-                inset 0 1px 0 rgba(255,255,255,0.2),
-                inset 0 -1px 0 rgba(0,0,0,0.1);
+        /* ===== SHIMMER BUTTON ===== */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
-        .btn-premium::before {
-            content: ''; position: absolute; inset: 0; border-radius: inherit;
-            background: linear-gradient(145deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 4px 16px rgba(var(--shadow-c), 0.3), 0 0 20px rgba(var(--shadow-c), 0.1); }
+            50% { box-shadow: 0 4px 16px rgba(var(--shadow-c), 0.4), 0 0 40px rgba(var(--shadow-c), 0.2); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        @keyframes border-rotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn-shimmer {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 15px 36px; border-radius: var(--radius); font-size: 15px; font-weight: 700;
+            cursor: pointer; border: none; position: relative; overflow: hidden; text-decoration: none;
+            background: linear-gradient(135deg, #7c3aed, #6d28d9, #5b21b6, #7c3aed);
+            background-size: 300% 100%;
+            color: #fff; letter-spacing: 0.3px;
+            animation: border-rotate 4s ease infinite, pulse-glow 3s ease-in-out infinite;
+            transition: transform 0.2s;
+        }
+        .btn-shimmer::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            animation: shimmer 3s ease-in-out infinite;
             pointer-events: none;
         }
-        .btn-premium:hover {
-            transform: translateY(-3px);
-            box-shadow:
-                0 2px 4px rgba(0,0,0,0.06),
-                0 8px 16px rgba(var(--shadow-c), 0.35),
-                0 16px 40px rgba(var(--shadow-c), 0.25),
-                inset 0 1px 0 rgba(255,255,255,0.25),
-                inset 0 -1px 0 rgba(0,0,0,0.1);
-            background: linear-gradient(145deg, #9b6dff 0%, #7c3aed 100%);
-        }
-        .btn-premium:active {
-            transform: translateY(1px);
-            box-shadow:
-                0 1px 2px rgba(0,0,0,0.06),
-                0 2px 4px rgba(var(--shadow-c), 0.25),
-                0 4px 12px rgba(var(--shadow-c), 0.15),
-                inset 0 1px 0 rgba(255,255,255,0.15),
-                inset 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .btn-outline {
+        .btn-shimmer:hover { transform: translateY(-3px) scale(1.02); }
+        .btn-shimmer:active { transform: translateY(1px) scale(0.98); }
+
+        .btn-glass {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 15px 34px; border-radius: var(--radius); font-size: 15px; font-weight: 700;
-            cursor: pointer; transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); border: none;
-            position: relative; text-decoration: none; outline: none; letter-spacing: 0.2px;
-            background: transparent; color: var(--accent);
-            border: 1.5px solid var(--border);
-            box-shadow: 0 1px 2px rgba(var(--shadow-c), 0.04);
+            padding: 15px 36px; border-radius: var(--radius); font-size: 15px; font-weight: 700;
+            cursor: pointer; position: relative; text-decoration: none; outline: none;
+            background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
+            color: var(--accent); border: 1.5px solid rgba(139,92,246,0.25);
+            box-shadow: 0 4px 16px rgba(var(--shadow-c), 0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+            transition: all 0.25s ease;
         }
-        .btn-outline:hover {
-            border-color: var(--accent-mid);
-            background: var(--accent-light);
+        .btn-glass:hover {
+            background: rgba(255,255,255,0.9);
+            border-color: rgba(139,92,246,0.4);
             transform: translateY(-2px);
-            box-shadow:
-                0 4px 8px rgba(var(--shadow-c), 0.1),
-                0 8px 24px rgba(var(--shadow-c), 0.08);
+            box-shadow: 0 8px 24px rgba(var(--shadow-c), 0.12), inset 0 1px 0 rgba(255,255,255,0.9);
         }
 
         /* NAV */
@@ -140,10 +137,16 @@
         .hero-actions { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
         .hero-note { font-size: 12px; color: var(--text-tertiary); margin-top: 18px; }
 
-        /* TOOL DEMO */
+        /* TOOL DEMO - with real content */
         .tool-demo { padding: 0 0 90px; text-align: center; }
         .tool-label { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 5px 14px; border-radius: 100px; margin-bottom: 18px; letter-spacing: 0.5px; }
-        .tool-frame { max-width: 960px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-xl), 0 0 0 1px var(--border); }
+        .tool-frame { max-width: 900px; margin: 20px auto 0; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-xl), 0 0 0 1px var(--border); }
+        .tool-demo-text { max-width: 640px; margin: 0 auto; }
+        .tool-demo-text h3 { font-size: 22px; font-weight: 800; margin-bottom: 12px; }
+        .tool-demo-text p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+        .tool-demo-features { display: flex; justify-content: center; gap: 32px; margin-top: 20px; flex-wrap: wrap; }
+        .tool-demo-feature { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); }
+        .tool-demo-feature span { font-size: 18px; }
 
         /* FEATURES */
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -166,7 +169,7 @@
         .lifestyle { background: linear-gradient(180deg, var(--bg-subtle) 0%, #ede8ff 100%); }
         .lifestyle-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .lifestyle-img { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); position: relative; }
-        .lifestyle-img::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 40px rgba(139,92,246,0.08); pointer-events: none; }
+        .lifestyle-img::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 40px rgba(139,92,246,0.06); pointer-events: none; }
         .lifestyle-img img { width: 100%; height: 380px; object-fit: cover; transition: transform 0.6s; }
         .lifestyle-img:hover img { transform: scale(1.04); }
         .lifestyle-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(139,92,246,0.08); color: var(--accent); font-size: 10px; font-weight: 700; padding: 5px 14px; border-radius: 100px; margin-bottom: 16px; letter-spacing: 0.5px; }
@@ -214,10 +217,11 @@
         .price-btn { width: 100%; padding: 13px; border-radius: var(--radius); font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; border: 1.5px solid var(--border); background: transparent; color: var(--accent); letter-spacing: 0.2px; }
         .price-btn:hover { border-color: var(--accent); background: var(--accent-light); }
         .price-btn.primary {
-            background: linear-gradient(145deg, var(--accent-mid), var(--accent)); color: #fff; border: none;
+            background: linear-gradient(135deg, #7c3aed, #6d28d9); color: #fff; border: none;
             box-shadow: 0 4px 16px rgba(var(--shadow-c), 0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+            animation: pulse-glow 3s ease-in-out infinite;
         }
-        .price-btn.primary:hover { background: linear-gradient(145deg, #9b6dff, #6d28d9); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(var(--shadow-c), 0.35); }
+        .price-btn.primary:hover { background: linear-gradient(135deg, #9b6dff, #7c3aed); transform: translateY(-1px); }
         .price-guarantee { text-align: center; font-size: 12px; color: var(--text-tertiary); margin-top: 36px; }
 
         /* TESTIMONIALS */
@@ -279,7 +283,7 @@
                 <a href="#pricing">Pricing</a>
                 <a href="#reviews">Reviews</a>
             </div>
-            <a href="#pricing" class="btn-outline" style="padding:10px 22px;font-size:13px;">Start Free Trial</a>
+            <a href="#pricing" class="btn-glass" style="padding:10px 22px;font-size:13px;">Start Free Trial</a>
         </div>
     </nav>
 
@@ -296,10 +300,10 @@
             <p class="hero-slogan-en">Where there's a lucky cat, there's prosperity</p>
             <p class="hero-sub">Stop staring at a blank page. Enter your product name or category, and our AI generates optimized titles, 13精准 tags, compelling descriptions, and lifestyle images — ready for Etsy, Shopify, or Amazon.</p>
             <div class="hero-actions">
-                <a href="#pricing" class="btn-premium">Start Free Trial</a>
-                <a href="#how" class="btn-outline">See how it works</a>
+                <a href="#pricing" class="btn-shimmer">Start Free Trial</a>
+                <a href="#how" class="btn-glass">See how it works</a>
             </div>
-            <p class="hero-note">No credit card required · 14-day free trial</p>
+            <p class="hero-note">No credit card required · 7-day free trial</p>
         </div>
     </section>
 
@@ -307,8 +311,17 @@
     <section class="tool-demo">
         <div class="container">
             <div class="tool-label">✨ Our Actual AI Tool</div>
+            <div class="tool-demo-text">
+                <h3>See It In Action</h3>
+                <p>Enter your product name, pick your platform, and watch ProsperCat generate a complete listing in seconds — optimized titles,精准 tags, compelling descriptions, all ready to copy and publish.</p>
+                <div class="tool-demo-features">
+                    <div class="tool-demo-feature"><span>⚡</span>30 seconds</div>
+                    <div class="tool-demo-feature"><span>📋</span>13 tags</div>
+                    <div class="tool-demo-feature"><span>🎯</span>Multi-platform</div>
+                </div>
+            </div>
             <div class="tool-frame">
-                <img src="images/candle-luxury.png" alt="ProsperCat Tool Demo">
+                <img src="images/hero-lifestyle.png" alt="ProsperCat AI Tool Interface">
             </div>
         </div>
     </section>
@@ -345,13 +358,13 @@
         <div class="container">
             <div class="lifestyle-inner">
                 <div class="lifestyle-img">
-                    <img src="images/candle-luxury.png" alt="AI Generated Lifestyle">
+                    <img src="images/candle-premium.png" alt="AI Generated Lifestyle">
                 </div>
                 <div class="lifestyle-text">
                     <div class="lifestyle-tag">✨ AI-Generated</div>
                     <h2>Your products,<br>in their best light</h2>
                     <p>Our AI analyzes your product and generates lifestyle scenes that resonate with your target audience. Candles that feel cozy. Jewelry that feels luxurious. Apparel that feels stylish.</p>
-                    <a href="#pricing" class="btn-premium">Start Free Trial</a>
+                    <a href="#pricing" class="btn-shimmer">Start Free Trial</a>
                 </div>
             </div>
         </div>
@@ -423,7 +436,7 @@
                     <button class="price-btn primary">Start Free Trial</button>
                 </div>
             </div>
-            <p class="price-guarantee">🔒 14-day free trial · No credit card required · Cancel anytime</p>
+            <p class="price-guarantee">🔒 7-day free trial · No credit card required · Cancel anytime</p>
         </div>
     </section>
 
@@ -469,7 +482,7 @@
             <img src="images/prospercat-logo.png" alt="ProsperCat" class="final-cta-logo">
             <h2>Stop writing listings manually.<br>Let AI do the work.</h2>
             <p>Join 10,000+ sellers who use ProsperCat to list faster, rank higher, and sell more — starting today.</p>
-            <a href="#pricing" class="btn-premium" style="font-size:16px;padding:1em 2.5em;">Start 14-Day Free Trial</a>
+            <a href="#pricing" class="btn-shimmer" style="font-size:16px;padding:1em 2.5em;">Start 7-Day Free Trial</a>
             <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:18px;">No credit card required · Cancel anytime</p>
         </div>
     </section>
