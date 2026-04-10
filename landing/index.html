@@ -6,7 +6,7 @@
     <title>ProsperCat — AI Listing Generator for Etsy, Shopify & Amazon</title>
     <meta name="description" content="Generate winning product titles, 13精准 tags, compelling descriptions, and lifestyle images in seconds. Built for sellers who want to scale.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -17,7 +17,7 @@
             --success: #10b981; --radius: 12px; --radius-lg: 20px;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow: 0 4px 16px rgba(0,0,0,0.08); --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
-            --max-w: 1100px; --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --max-w: 1100px; --font: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         html { scroll-behavior: smooth; }
         body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
@@ -33,13 +33,15 @@
         .section-head.center .section-sub { margin: 0 auto; }
 
         /* NAV */
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-subtle); }
         nav .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-        .nav-logo { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: var(--text); }
-        .nav-logo .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: var(--text); }
+        .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
         .nav-links { display: flex; gap: 32px; }
         .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-secondary); transition: color 0.2s; }
         .nav-links a:hover { color: var(--text); }
+        .nav-cta { background: var(--accent); color: #fff; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; transition: background 0.2s; }
+        .nav-cta:hover { background: var(--accent-dark); }
 
         /* BUTTONS */
         .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; }
@@ -58,27 +60,39 @@
         @keyframes blob { 0%, 100% { transform: scale(0); opacity: 0.5; } 50% { transform: scale(1); opacity: 0.3; } }
 
         /* HERO */
-        .hero { padding: 140px 0 80px; text-align: center; }
+        .hero { padding: 120px 0 80px; text-align: center; background: linear-gradient(180deg, var(--bg) 0%, var(--bg-subtle) 100%); }
+        .hero-logo { width: 100px; height: 100px; border-radius: 24px; box-shadow: 0 8px 32px rgba(124,58,237,0.25); margin: 0 auto 24px; display: block; }
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent-dark); padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 600; margin-bottom: 28px; border: 1px solid rgba(124,58,237,0.15); }
-        .hero-badge img { width: 22px; height: 22px; border-radius: 6px; vertical-align: middle; }
-        .hero h1 { font-size: clamp(42px, 7vw, 76px); font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 24px; }
+        .hero-badge img { width: 18px; height: 18px; border-radius: 4px; vertical-align: middle; }
+        .hero h1 { font-size: clamp(40px, 7vw, 72px); font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 20px; }
         .hero h1 span { background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-slogan { font-size: 20px; color: var(--accent); font-weight: 700; margin-bottom: 4px; letter-spacing: 1px; }
-        .hero-slogan-sub { font-size: 12px; color: var(--text-tertiary); margin-bottom: 16px; font-style: italic; }
-        .hero-sub { font-size: 18px; color: var(--text-secondary); max-width: 560px; margin: 0 auto 40px; line-height: 1.7; }
+        .hero-slogan { font-size: 22px; color: var(--accent); font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
+        .hero-slogan-en { font-size: 13px; color: var(--text-tertiary); margin-bottom: 20px; font-style: italic; }
+        .hero-sub { font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 36px; line-height: 1.7; }
         .hero-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
         .hero-note { font-size: 13px; color: var(--text-tertiary); margin-top: 16px; }
 
-        /* CARDS 3D HOVER */
-        .card-3d { transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s; }
-        .card-3d:hover { transform: translateY(-8px) rotateX(2deg) rotateY(-2deg); box-shadow: 0 24px 48px rgba(0,0,0,0.15); }
+        /* TOOL DEMO */
+        .tool-demo { padding: 0 0 80px; text-align: center; }
+        .tool-demo img { max-width: 900px; width: 100%; border-radius: 16px; box-shadow: var(--shadow-lg); margin: 0 auto; border: 1px solid var(--border); }
+        .tool-label { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; letter-spacing: 0.5px; }
 
         /* FEATURES */
         .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .feature-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; }
+        .feature-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s; }
+        .feature-card:hover { transform: translateY(-6px) rotateX(1deg) rotateY(-1deg); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .feature-icon { width: 48px; height: 48px; background: var(--accent-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
         .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
         .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+        /* LIFESTYLE IMAGE */
+        .lifestyle-section { background: var(--bg-subtle); }
+        .lifestyle-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+        .lifestyle-img { border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); overflow: hidden; }
+        .lifestyle-img img { width: 100%; height: 360px; object-fit: cover; }
+        .lifestyle-text h2 { font-size: clamp(28px, 4vw, 36px); font-weight: 900; letter-spacing: -1px; margin-bottom: 16px; }
+        .lifestyle-text p { font-size: 16px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px; }
+        .lifestyle-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-light); color: var(--accent); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
 
         /* HOW IT WORKS */
         .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: center; }
@@ -89,13 +103,15 @@
         /* PRICING */
         .pricing { background: var(--bg-subtle); }
         .pricing-grid { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; max-width: 720px; margin: 0 auto; }
-        .price-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; flex: 1; min-width: 280px; max-width: 340px; }
+        .price-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; flex: 1; min-width: 280px; max-width: 340px; position: relative; transition: transform 0.3s, box-shadow 0.3s; }
+        .price-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .price-card.popular { border: 2px solid var(--accent); box-shadow: 0 0 0 1px var(--accent), var(--shadow-lg); }
         .price-popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 4px 16px; border-radius: 100px; font-size: 12px; font-weight: 700; white-space: nowrap; }
         .price-name { font-size: 14px; font-weight: 700; color: var(--text-secondary); margin-bottom: 8px; }
-        .price-amount { font-size: 44px; font-weight: 900; letter-spacing: -2px; line-height: 1; margin-bottom: 8px; }
+        .price-amount { font-size: 44px; font-weight: 900; letter-spacing: -2px; line-height: 1; margin-bottom: 4px; }
         .price-amount .price-currency { font-size: 20px; font-weight: 700; vertical-align: top; margin-top: 8px; display: inline-block; }
         .price-amount .price-period { font-size: 14px; font-weight: 500; color: var(--text-tertiary); }
+        .price-save { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
         .price-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.5; }
         .price-features { list-style: none; margin-bottom: 24px; }
         .price-features li { font-size: 14px; color: var(--text-secondary); padding: 6px 0; display: flex; align-items: center; gap: 8px; }
@@ -108,7 +124,8 @@
 
         /* TESTIMONIALS */
         .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .testi-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; }
+        .testi-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; transition: transform 0.3s, box-shadow 0.3s; }
+        .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
         .testi-stars { color: #fbbf24; margin-bottom: 12px; font-size: 18px; }
         .testi-text { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px; }
         .testi-author { display: flex; align-items: center; gap: 12px; }
@@ -119,23 +136,23 @@
         /* CTA */
         .final-cta { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 80px 0; text-align: center; }
         .final-cta-inner { max-width: 600px; margin: 0 auto; }
+        .final-cta-logo { width: 100px; height: 100px; border-radius: 24px; box-shadow: 0 0 60px rgba(124,58,237,0.5), 0 0 100px rgba(124,58,237,0.2); margin: 0 auto 28px; display: block; }
         .final-cta h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 900; color: #fff; margin-bottom: 16px; line-height: 1.2; }
         .final-cta p { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 32px; }
 
         /* FOOTER */
         footer { background: var(--bg); border-top: 1px solid var(--border); padding: 48px 0; }
         .footer-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
-        .footer-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+        .footer-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; }
         .footer-links { display: flex; gap: 24px; font-size: 14px; color: var(--text-secondary); }
         .footer-links a:hover { color: var(--text); }
         .footer-copy { font-size: 13px; color: var(--text-tertiary); }
 
-        /* PLATFORMS */
-        .platforms { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.5; margin-top: 48px; }
-        .platform { font-size: 14px; font-weight: 600; color: var(--text-secondary); }
+        /* DIVIDER */
+        .divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), #a78bfa); border-radius: 2px; margin: 0 auto 24px; }
 
         @media (max-width: 768px) {
-            .features-grid, .steps, .testi-grid { grid-template-columns: 1fr; }
+            .features-grid, .steps, .testi-grid, .lifestyle-inner { grid-template-columns: 1fr; }
             .pricing-grid { flex-direction: column; align-items: center; }
             .price-card { max-width: 400px; width: 100%; }
             .nav-links { display: none; }
@@ -149,34 +166,45 @@
     <!-- NAV -->
     <nav>
         <div class="container">
-            <div class="nav-logo"><div class="dot"></div>ProsperCat</div>
+            <div class="nav-logo">
+                <img src="images/prospercat-logo.png" alt="ProsperCat">
+                ProsperCat
+            </div>
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#how">How it works</a>
                 <a href="#pricing">Pricing</a>
                 <a href="#reviews">Reviews</a>
             </div>
-            <a href="#pricing" class="c-button c-button--gooey" style="padding:0.6em 1.2em;font-size:13px;">Start Free Trial<span class="c-button__blobs"><div></div><div></div><div></div></span></a>
+            <a href="#pricing" class="nav-cta">Start Free Trial</a>
         </div>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
         <div class="container">
+            <img src="images/prospercat-logo.png" alt="ProsperCat" class="hero-logo">
             <div class="hero-badge">
-                <img src="images/lucky-cat-badge.png" alt="Lucky Cat">
+                <img src="images/prospercat-logo.png" alt="Lucky Cat">
                 AI-Powered · 10,000+ Sellers Trust Us
             </div>
-            <img src="images/lucky-cat-badge.png" alt="ProsperCat" style="width:80px;height:80px;border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.25);margin:0 auto 16px;display:block;">
             <h1>Write Listings That<br><span>Sell — in 30 Seconds</span></h1>
             <p class="hero-slogan">🐱 得招财猫者得天下</p>
-            <p class="hero-slogan-sub">Where there's a lucky cat, there's prosperity</p>
+            <p class="hero-slogan-en">Where there's a lucky cat, there's prosperity</p>
             <p class="hero-sub">Stop staring at a blank page. Enter your product name or category, and our AI generates optimized titles, 13精准 tags, compelling descriptions, and lifestyle images — ready for Etsy, Shopify, or Amazon.</p>
             <div class="hero-actions">
                 <a href="#pricing" class="c-button c-button--gooey">Start Free Trial<span class="c-button__blobs"><div></div><div></div><div></div></span></a>
                 <a href="#how" class="btn-secondary">See how it works</a>
             </div>
             <p class="hero-note">No credit card required · 14-day free trial</p>
+        </div>
+    </section>
+
+    <!-- TOOL DEMO -->
+    <section class="tool-demo">
+        <div class="container">
+            <div class="tool-label">✨ AI-Powered Tool Interface</div>
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="ProsperCat Tool Demo" onerror="this.style.display='none'">
         </div>
     </section>
 
@@ -188,20 +216,37 @@
                 <h2 class="section-title">Everything you need<br>to list faster</h2>
             </div>
             <div class="features-grid">
-                <div class="feature-card card-3d">
+                <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>30-Second Generation</h3>
                     <p>Enter your product name and get a complete listing in seconds. No more blank page paralysis.</p>
                 </div>
-                <div class="feature-card card-3d">
+                <div class="feature-card">
                     <div class="feature-icon">🎯</div>
                     <h3>13精准 Tags</h3>
                     <p>AI-optimized tags tailored for each platform's search algorithm. Get found by the right buyers.</p>
                 </div>
-                <div class="feature-card card-3d">
+                <div class="feature-card">
                     <div class="feature-icon">✨</div>
                     <h3>Lifestyle Images</h3>
                     <p>AI-generated scene suggestions that make your products irresistible. No expensive photoshoots needed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIFESTYLE IMAGE -->
+    <section class="section lifestyle-section">
+        <div class="container">
+            <div class="lifestyle-inner">
+                <div class="lifestyle-img">
+                    <img src="images/candle-lifestyle.png" alt="AI Generated Lifestyle Image">
+                </div>
+                <div class="lifestyle-text">
+                    <div class="lifestyle-tag">✨ AI-Generated</div>
+                    <h2>Your products,<br>in their best light</h2>
+                    <p>Our AI analyzes your product and generates lifestyle scenes that resonate with your target audience. Candles that feel cozy. Jewelry that feels luxurious. Apparel that feels stylish.</p>
+                    <a href="#pricing" class="c-button c-button--gooey">Try It Free<span class="c-button__blobs"><div></div><div></div><div></div></span></a>
                 </div>
             </div>
         </div>
@@ -243,7 +288,7 @@
                 <p class="section-sub" style="margin:0 auto;">Start free. Scale when you're ready. Cancel anytime.</p>
             </div>
             <div class="pricing-grid">
-                <div class="price-card card-3d" style="position:relative;">
+                <div class="price-card" style="position:relative;">
                     <div class="price-name">Starter</div>
                     <div class="price-amount"><span class="price-currency">$</span>39<span class="price-period">/mo</span></div>
                     <div class="price-desc">Perfect for new sellers testing the waters.</div>
@@ -256,11 +301,11 @@
                     </ul>
                     <button class="price-btn">Start Free Trial</button>
                 </div>
-                <div class="price-card popular card-3d" style="position:relative;">
+                <div class="price-card popular" style="position:relative;">
                     <div class="price-popular-badge">Most Popular</div>
                     <div class="price-name">Pro</div>
                     <div class="price-amount"><span class="price-currency">$</span>299<span class="price-period">/yr</span></div>
-                    <div class="price-desc" style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:8px;">Save 47% · ~$21/mo</div>
+                    <div class="price-save">Save 47% · ~$21/mo</div>
                     <div class="price-desc">For serious sellers who list daily and want the full AI suite.</div>
                     <ul class="price-features">
                         <li>Unlimited listings</li>
@@ -316,18 +361,21 @@
     <!-- CTA -->
     <section class="final-cta">
         <div class="final-cta-inner">
-            <img src="images/lucky-cat-badge.png" alt="ProsperCat" style="width:100px;height:100px;border-radius:24px;box-shadow:0 0 40px rgba(124,58,237,0.5), 0 0 80px rgba(124,58,237,0.2);margin:0 auto 24px;display:block;">
+            <img src="images/prospercat-logo.png" alt="ProsperCat" class="final-cta-logo">
             <h2>Stop writing listings manually.<br>Let AI do the work.</h2>
             <p>Join 10,000+ sellers who use ProsperCat to list faster, rank higher, and sell more — starting today.</p>
-            <a href="#pricing" class="c-button c-button--gooey" style="font-size:16px;padding:1em 2.5em;">Start 7-Day Free Trial<span class="c-button__blobs"><div></div><div></div><div></div></span></a>
-            <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:16px;">No credit card required · 14-day free trial</p>
+            <a href="#pricing" class="c-button c-button--gooey" style="font-size:16px;padding:1em 2.5em;">Start 14-Day Free Trial<span class="c-button__blobs"><div></div><div></div><div></div></span></a>
+            <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:16px;">No credit card required · Cancel anytime</p>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
         <div class="footer-inner">
-            <div class="footer-brand"><div class="dot" style="width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;"></div>ProsperCat</div>
+            <div class="footer-brand">
+                <img src="images/prospercat-logo.png" alt="" style="width:24px;height:24px;border-radius:6px;">
+                ProsperCat
+            </div>
             <div class="footer-links">
                 <a href="#features">Features</a>
                 <a href="#pricing">Pricing</a>
